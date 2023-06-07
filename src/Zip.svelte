@@ -2,6 +2,7 @@
   export let files: FileList;
   export let classes: string;
   export let box_rot: string = "";
+  export let max: boolean = false;
 </script>
 
 <div class="flex items-center justify-center">
@@ -22,7 +23,8 @@
         "
   />
 
-  <div class="absolute group h-48 w-48  {box_rot} ">
+  <div class="static group h-48 w-48 
+    {box_rot} ">
     <!--Black bg-->
     <div
       class="absolute rounded-md
@@ -35,7 +37,7 @@
         group-hover:translate-x-6
         group-hover:translate-y-6"
     />
-    <!--pink box bg-->
+    <!--The box-->
     <div
       style="background-image: url(dot.svg)"
       class="absolute rounded-md
@@ -50,6 +52,11 @@
         group-hover:w-52
         group-hover:-translate-x-2
         group-hover:-translate-y-2
+        {max ? 'h-[50vh]' : ''}
+        {max ? 'w-[50vw]' : ''}
+        {max ? 'w-screen' : ''}
+        {max ? 'pointer-events-none' : 'pointer-events-auto'}
+            
         "
     >
       <!--input field-->
@@ -73,5 +80,15 @@
         />
       </label>
     </div>
+
+    <div
+      style="background-image: url(zip.svg);"
+      class="absolute w-full h-full bg-[length:50px_50px] bg-no-repeat bg-right-top
+      fill-orange-600
+      pointer-events-none
+      transition-all
+      group-hover:-translate-y-2
+      "
+    />
   </div>
 </div>
