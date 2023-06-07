@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Zip from "./Zip.svelte";
   import { WasmZip } from "wasm-zip";
   let files: FileList;
   let loading = false;
@@ -22,153 +23,28 @@
   }
 </script>
 
-<main
-  style="background-image: url(dot.svg)"
-  class="bg-violet-800
-  w-screen h-screen
-  bg-[length:80px_80px]"
->
-  <div class="flex items-center justify-center h-screen w-screen">
-    <div
-      class="absolute
-        h-[50vh] w-1
-        -translate-y-[34vh]
-        -translate-x-16
-        bg-black
-        "
-    />
-    <div
-      class="absolute
-        h-[50vh] w-1
-        -translate-y-[34vh]
-        -translate-x-12
-        opacity-25
-        bg-black
-        "
-    />
-    <div
-      class="absolute
-        h-[50vh] w-1
-        -translate-y-[25vh]
-        translate-x-28
-        bg-black
-        "
-    />
-    <div
-      class="absolute
-        h-[50vh] w-1
-        -translate-y-[25vh]
-        translate-x-32
-        opacity-25
-        bg-black
-        "
-    />
+<main>
+  <div
+    style="background-image: url(dot.svg)"
+    class="
+    bg-violet-800 rounded-3xl ring-inset ring-yellow-600 ring-[1rem]
+    flex items-center justify-center
+    h-screen w-screen
+    bg-[length:80px_80px]"
+  >
     <!-- Folders-->
-    <div class="absolute group h-48 w-48 rotate-6 translate-x-24 translate-y-8">
-      <!--Black bg-->
-      <div
-        class="absolute rounded-md
-        h-48 w-48
-        bg-black
-        translate-x-3 translate-y-4
-        transition
-        group-hover:translate-x-2
-        group-hover:rotate-6
-        group-hover:translate-y-6"
-      />
-      <!--pink box bg-->
-      <div
-        style="background-image: url(dot.svg)"
-        class="absolute rounded-md
-        font-bold
-        bg-[length:60px_60px]
-        h-48 w-48
-        ring-4 ring-black
-        bg-green-600
-        bg-center
-        transition-all
-        group-hover:h-52
-        group-hover:w-52
-        group-hover:-translate-x-2
-        group-hover:-translate-y-2"
-      >
-        <!--input field-->
-        <label
-          for="file-upload"
-          class="cursor-pointer flex flex-col items-center justify-center w-full h-full"
-        >
-          <p
-            class="text-center font-black leading-[1.3rem] text-2xl drop-shadow-[0_3px_0px_rgba(0,0,0,1)]"
-          >
-            ZIP A<br />
-            FOLDER
-          </p>
-          <input
-            id="file-upload"
-            type="file"
-            accept="*"
-            multiple
-            class="hidden"
-            bind:files
-          />
-        </label>
-      </div>
+    <div
+      class="transition-all absolute translate-y-16 translate-x-16 sm:translate-x-24"
+    >
+      <Zip {files} classes="bg-green-600 bg-[length:60px_60px]" box_rot="rotate-6"/>
     </div>
 
-    <!--The other button-->
     <div
-      class="absolute group h-48 w-48 -rotate-6 -translate-x-16 -translate-y-32"
+      class="transition-all absolute -translate-y-24 -translate-x-16"
     >
-      <!--Black bg-->
-      <div
-        class="absolute rounded-md
-        h-48 w-48
-        bg-black
-        translate-x-3 translate-y-3
-        transition
-        group-hover:translate-x-6
-        group-hover:rotate-3
-        group-hover:translate-y-6"
-      />
-      <!--pink box bg-->
-      <div
-        style="background-image: url(dot.svg)"
-        class="absolute rounded-md
-        font-bold
-        bg-[length:30px_30px]
-        h-48 w-48
-        bg-pink-600
-        bg-center
-        ring-4 ring-black
-        transition-all
-        group-hover:h-52
-        group-hover:w-52
-        group-hover:-translate-x-2
-        group-hover:-translate-y-2
-        "
-      >
-        <!--input field-->
-        <label
-          for="file-upload"
-          class="cursor-pointer flex flex-col items-center justify-center w-full h-full"
-        >
-          <p
-            class="text-center font-black leading-[1.3rem] text-2xl drop-shadow-[0_3px_0px_rgba(0,0,0,1)]"
-          >
-            ZIP A<br />
-            FILE
-          </p>
-          <input
-            id="file-upload"
-            type="file"
-            accept="*"
-            multiple
-            class="hidden"
-            bind:files
-          />
-        </label>
-      </div>
+      <Zip {files} classes="bg-pink-600 bg-[length:24px_24px]" box_rot="-rotate-6"/>
     </div>
+
     <!-- show loading when promis is waiting-->
     {#if loading}
       {#await zipped_files then n}
