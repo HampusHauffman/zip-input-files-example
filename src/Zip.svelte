@@ -3,6 +3,7 @@
   export let classes: string;
   export let box_rot: string = "";
   export let max: boolean = false;
+  export let scale_on_drag: boolean = false;
 </script>
 
 <div class="flex items-center justify-center">
@@ -23,8 +24,10 @@
         "
   />
 
-  <div class="static group h-48 w-48 
-    {box_rot} ">
+  <div
+    class="static group h-48 w-48
+    {box_rot} "
+  >
     <!--Black bg-->
     <div
       class="absolute rounded-md
@@ -39,6 +42,16 @@
     />
     <!--The box-->
     <div
+      on:drop={(e) => {
+        e.preventDefault();
+        files = e.dataTransfer.files;
+      }}
+      on:dragover={(e) => {
+        e.preventDefault();
+        if (scale_on_drag) {
+          max = true;
+        }
+      }}
       style="background-image: url(dot.svg)"
       class="absolute rounded-md
         font-bold
@@ -55,8 +68,7 @@
         {max ? 'h-[50vh]' : ''}
         {max ? 'w-[50vw]' : ''}
         {max ? 'w-screen' : ''}
-        {max ? 'pointer-events-none' : 'pointer-events-auto'}
-            
+        {max ? 'pointer-events-none' : ''}
         "
     >
       <!--input field-->

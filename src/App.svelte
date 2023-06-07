@@ -26,22 +26,19 @@
 
   let countdown = 1; // Countdown duration in seconds
 
-  let countdownInterval: number | undefined;
+  // Start countdown when file_drag is set to true
+  $: if (file_drag) {
+    console.log("dragging");
+  }
 
-  function startCountdown() {
-    countdown = 1; // Reset the countdown duration
-    countdownInterval = setInterval(() => {
+  $: if (file_drag) {
+    countdown = 1;
+    setInterval(() => {
       countdown--;
       if (countdown === 0) {
         file_drag = false; // Set file_drag to false when countdown reaches zero
-        clearInterval(countdownInterval); // Clear the countdown interval
       }
     }, 1000); // Update the countdown every second
-  }
-
-  // Start countdown when file_drag is set to true
-  $: if (file_drag) {
-    startCountdown();
   }
 </script>
 
@@ -49,7 +46,12 @@
   <div
     id="all"
     class="absolute h-screen w-screen"
+    on:drop={(e) => {
+      e.preventDefault();
+      files = e.dataTransfer.files;
+    }}
     on:dragover={(e) => {
+      e.preventDefault();
       file_drag = true;
     }}
   />
@@ -79,24 +81,15 @@
         classes="bg-pink-600 bg-[length:24px_24px]"
         box_rot="-rotate-6"
         max={file_drag}
+        scale_on_drag={true}
       />
     </div>
 
     <!-- show loading when promis is waiting-->
-    {#if loading}
-      {#await zipped_files then n}
-        <div class="absolute flex flex-col items-center justify-center">
-          <p class="text-center font-black leading-[1.3rem] text-2xl">
-            Loading...
-          </p>
-        </div>
-      {/await}
-    {/if}
-
-    {#each zz as item}
-      <a href={item} download="filename.zip">{item}</a>
-    {/each}
   </div>
+  {#each zz as item}
+    <a href={item} download="filename.zip">{item}</a>
+  {/each}
 </main>
 
 <style>
