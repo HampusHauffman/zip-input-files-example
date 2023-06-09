@@ -2,22 +2,20 @@
   export let files: FileList;
   export let classes: string;
   export let box_rot: string = "";
-  export let max: boolean = false;
-  export let scale_on_drag: boolean = false;
 </script>
 
 <div class="flex items-center justify-center">
   <div
     class="absolute
-        h-[50vh] w-1
-        -translate-y-[34vh]
+        h-[60vh] w-1
+        -translate-y-[25vh]
         bg-black
         "
   />
   <div
     class="absolute
-        h-[50vh] w-1
-        -translate-y-[34vh]
+        h-[60vh] w-1
+        -translate-y-[25vh]
         translate-x-4
         opacity-25
         bg-black
@@ -42,16 +40,6 @@
     />
     <!--The box-->
     <div
-      on:drop={(e) => {
-        e.preventDefault();
-        files = e.dataTransfer.files;
-      }}
-      on:dragover={(e) => {
-        e.preventDefault();
-        if (scale_on_drag) {
-          max = true;
-        }
-      }}
       style="background-image: url(dot.svg)"
       class="absolute rounded-md
         font-bold
@@ -65,10 +53,6 @@
         group-hover:w-52
         group-hover:-translate-x-2
         group-hover:-translate-y-2
-        {max ? 'h-[50vh]' : ''}
-        {max ? 'w-[50vw]' : ''}
-        {max ? 'w-screen' : ''}
-        {max ? 'pointer-events-none' : ''}
         "
     >
       <!--input field-->

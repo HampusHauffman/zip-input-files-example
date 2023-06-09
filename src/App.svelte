@@ -38,21 +38,29 @@
       if (countdown === 0) {
         file_drag = false; // Set file_drag to false when countdown reaches zero
       }
-    }, 1000); // Update the countdown every second
+    }, 2000); // Update the countdown every second
   }
 </script>
 
 <main>
+  <div class="absolute right-10 top-10">
+    <p
+      class="text-center font-black leading-[1.3rem] text-2xl drop-shadow-[0_3px_0px_rgba(0,0,0,1)]"
+    >
+      OR DRAG THE<br />
+      FILES HERE
+    </p>
+  </div>
   <div
     id="all"
     class="absolute h-screen w-screen"
     on:drop={(e) => {
       e.preventDefault();
+      console.log("drop");
       files = e.dataTransfer.files;
     }}
     on:dragover={(e) => {
       e.preventDefault();
-      file_drag = true;
     }}
   />
   <div
@@ -80,8 +88,6 @@
         {files}
         classes="bg-pink-600 bg-[length:24px_24px]"
         box_rot="-rotate-6"
-        max={file_drag}
-        scale_on_drag={true}
       />
     </div>
 
