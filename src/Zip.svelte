@@ -1,7 +1,14 @@
 <script lang="ts">
-  export let files: FileList;
+  export let onChange: (value: FileList) => void;
+  let value: FileList;
+  $: onChange(value);
   export let classes: string;
   export let box_rot: string = "";
+  export let folder: boolean;
+
+  function setAttributeWebkitdirectory(node: HTMLInputElement) {
+    node.setAttribute("webkitdirectory", "");
+  }
 </script>
 
 <div class="flex items-center justify-center">
@@ -64,7 +71,11 @@
           class="text-center font-black leading-[1.3rem] text-2xl drop-shadow-[0_3px_0px_rgba(0,0,0,1)]"
         >
           ZIP A<br />
-          FILE
+          {#if folder}
+            FOLDER
+          {:else}
+            FILE
+          {/if}
         </p>
         <input
           id="file-upload"
@@ -72,7 +83,8 @@
           accept="*"
           multiple
           class="hidden"
-          bind:files
+          use:setAttributeWebkitdirectory
+          bind:value
         />
       </label>
     </div>

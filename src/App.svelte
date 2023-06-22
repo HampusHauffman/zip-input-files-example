@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import Zip from "./Zip.svelte";
   import { WasmZip } from "wasm-zip";
   let file_drag = false;
@@ -77,17 +76,25 @@
       class="transition-all absolute translate-y-16 translate-x-16 sm:translate-x-24"
     >
       <Zip
-        {files}
         classes="bg-green-600 bg-[length:60px_60px]"
         box_rot="rotate-6"
+        folder={false}
+        onChange={(e) => {
+          console.log(e);
+          files = e;
+        }}
       />
     </div>
 
     <div class="transition-all absolute -translate-y-24 -translate-x-16">
       <Zip
-        {files}
         classes="bg-pink-600 bg-[length:24px_24px]"
         box_rot="-rotate-6"
+        folder={true}
+        onChange={(e) => {
+          console.log(e);
+          files = e;
+        }}
       />
     </div>
 
