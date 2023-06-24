@@ -1,28 +1,29 @@
 <script lang="ts">
-  export let onChange: (value: FileList) => void;
-  let value: FileList;
-  $: onChange(value);
+  export let files: FileList;
   export let classes: string;
   export let box_rot: string = "";
   export let folder: boolean;
 
   function setAttributeWebkitdirectory(node: HTMLInputElement) {
-    node.setAttribute("webkitdirectory", "");
+    if (folder) {
+      node.setAttribute("webkitdirectory", "");
+    }
   }
 </script>
 
 <div class="flex items-center justify-center">
+  <!-- rope -->
   <div
     class="absolute
         h-[60vh] w-1
-        -translate-y-[25vh]
+        -translate-y-[27vh]
         bg-black
         "
   />
   <div
     class="absolute
         h-[60vh] w-1
-        -translate-y-[25vh]
+        -translate-y-[27vh]
         translate-x-4
         opacity-25
         bg-black
@@ -64,7 +65,7 @@
     >
       <!--input field-->
       <label
-        for="file-upload"
+        for="{folder}file-upload"
         class="cursor-pointer flex flex-col items-center justify-center w-full h-full"
       >
         <p
@@ -78,13 +79,13 @@
           {/if}
         </p>
         <input
-          id="file-upload"
+          id="{folder}file-upload"
           type="file"
           accept="*"
           multiple
           class="hidden"
           use:setAttributeWebkitdirectory
-          bind:value
+          bind:files
         />
       </label>
     </div>
