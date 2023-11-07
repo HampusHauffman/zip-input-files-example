@@ -8,14 +8,19 @@
   let stored_zipped_files: string[] = [];
 
   $: if (files) {
-    loading == true;
+    //16:20
+    let startTime = new Date().getTime();
+    loading = true;
 
     let zipped_files: Promise<string> = wasm_zip.zip(files);
 
     zipped_files.then((z) => {
       console.log(z);
       stored_zipped_files = wasm_zip.get_zip();
-      loading == false;
+      loading = false;
+      let endTime = new Date().getTime();
+      let timeDiff = endTime - startTime;
+      console.log(timeDiff);
     });
   }
 </script>
@@ -52,6 +57,11 @@
     </div>
 
     <!-- show loading when promis is waiting-->
+    {#if files}
+      <div class="absolute top-0 left-0 ml-6 mt-6 grid grid-cols-1">
+        <p class="text-2xl font-bold text-center">Loading...</p>
+      </div>
+    {/if}
   </div>
   <DownloadLink items={stored_zipped_files} />
 </main>
