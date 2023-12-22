@@ -13,8 +13,8 @@
     "@sveltejs/adapter-auto": "^2.1.0",
     "@types/wicg-file-system-access": "^2020.9.6",
     "vite-plugin-top-level-await": "^1.3.1",
-    "vite-plugin-wasm": "^3.2.2",
-    "wasm-zip": "file:~/Documents/wasm-zip/pkg/zip-input-files-0.0.1.tgz"
+    "vite-plugin-wasm": "^3.3.0",
+    "wasm-zip": "file:/home/h/Doc/zip-input-files/pkg/wasm-zip-0.0.2.tgz"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^2.0.4",

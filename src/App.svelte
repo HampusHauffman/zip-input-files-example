@@ -1,10 +1,13 @@
 <script lang="ts">
   import DownloadLink from "./DownloadLink.svelte";
   import Zip from "./Zip.svelte";
-  import { WasmZip } from "wasm-zip";
+  import init, {WasmZip} from "../node_modules/wasm-zip/wasm_zip.js";
   let loading = false;
   let files: FileList;
-  let wasm_zip = new WasmZip();
+  let wasm_zip ;
+  init().then((a ) => {
+    wasm_zip = new WasmZip();
+  });
   let stored_zipped_files: string[] = [];
 
   $: if (files) {
